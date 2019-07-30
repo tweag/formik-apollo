@@ -25,7 +25,7 @@ export const useSubmit = <T>(
     getStatus = getStatusDefault,
     getErrors = getValidationErrors
   }: SubmitOptions = {}
-): SubmitHandler<any> => {
+): SubmitHandler<T> => {
   return useCallback(
     async (values, form) => {
       form.setSubmitting(true);
@@ -35,7 +35,7 @@ export const useSubmit = <T>(
         form.setSubmitting(false);
       } catch (error) {
         form.setStatus(getStatus(error));
-        form.setErrors(getErrors(error));
+        form.setErrors(getErrors(error) as any);
         form.setSubmitting(false);
         throw error;
       }
