@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { isApolloError } from "apollo-client";
 import { getValidationErrors } from "./errors";
 import { SubmitHandler, SubmitOptions } from "./types";
 
@@ -25,10 +26,13 @@ export const useSubmit = <T>(
         form.setSubmitting(false);
         return result;
       } catch (error) {
+        if (!isApolloError(error)) {
+          throw error;
+        }
+
         form.setStatus(getStatus(error));
         form.setErrors(getErrors(error) as any);
         form.setSubmitting(false);
-        throw error;
       }
     },
     [onSubmit, getStatus, getErrors]

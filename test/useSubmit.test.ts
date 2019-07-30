@@ -39,9 +39,7 @@ describe("useSubmit", () => {
     const { result } = renderHook(() => useSubmit(onSubmit));
     const formikProps = createFormikProps();
 
-    await expect(result.current({}, formikProps as any)).rejects.toThrowError(
-      error
-    );
+    await result.current({}, formikProps as any);
 
     expect(formikProps.setSubmitting).toHaveBeenCalledTimes(2);
     expect(formikProps.setErrors).toHaveBeenCalledWith({ name: "is required" });
