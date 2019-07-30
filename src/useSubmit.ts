@@ -21,8 +21,9 @@ export const useSubmit = <T>(
       form.setSubmitting(true);
 
       try {
-        await onSubmit(values, form);
+        const result = await onSubmit(values, form);
         form.setSubmitting(false);
+        return result;
       } catch (error) {
         form.setStatus(getStatus(error));
         form.setErrors(getErrors(error) as any);
