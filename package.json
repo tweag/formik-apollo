@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "name": "formik-apollo",
+  "description": "A React hooks to extract validation errors from a GraphQL request and apply them to a Formik form.",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "prebuild": "rm -rf ./lib",
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "apollo-client": "*",
+    "formik": "^2.0",
+    "graphql": "*",
+    "react": ">=16.8"
+  },
+  "devDependencies": {
+    "apollo-client": "^2.6.3",
+    "formik": "^2.0.1-rc.12",
+    "graphql": "^14.0.0",
+    "react": "^16.8.6"
+  }
+}
