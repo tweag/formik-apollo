@@ -1,5 +1,5 @@
 {
-  "version": "0.6.6",
+  "version": "0.6.7",
   "name": "formik-apollo",
   "description": "A React hooks to extract validation errors from a GraphQL request and apply them to a Formik form.",
   "license": "MIT",
