@@ -1,11 +1,6 @@
 import { GraphQLError } from "graphql";
 import { ApolloError, isApolloError } from "apollo-client";
-
-export type Problems = Record<string, string | string[]>;
-
-export interface ValidationError extends GraphQLError {
-  extensions: { problems: Problems };
-}
+import { Problems, ValidationError } from "./types";
 
 const isString = (value: any) => typeof value === "string";
 const isError = (value: any) => value instanceof Error;

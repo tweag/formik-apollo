@@ -1,16 +1,6 @@
 import { useCallback } from "react";
-import { FormikHelpers } from "formik";
 import { getValidationErrors } from "./errors";
-
-export type SubmitHandler<T> = (
-  data: T,
-  actions: FormikHelpers<T>
-) => Promise<void>;
-
-export interface SubmitOptions {
-  getStatus?: (error: Error) => any;
-  getErrors?: (error: Error) => Record<string, string>;
-}
+import { SubmitHandler, SubmitOptions } from "./types";
 
 const getStatusDefault = (error: Error) => ({
   error: error.message
