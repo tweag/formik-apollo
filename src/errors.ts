@@ -3,7 +3,6 @@ import { ApolloError, isApolloError } from "apollo-client";
 import { Problems, ValidationError } from "./types";
 
 const isString = (value: any) => typeof value === "string";
-const isError = (value: any) => value instanceof Error;
 const isObject = (value: any) => value && typeof value === "object";
 
 /**
@@ -42,8 +41,8 @@ export const getErrorCode = (error: Error): string | undefined =>
 /**
  * Is the error a validation error?
  */
-export const isValidationError = (error: Error): error is ValidationError =>
-  error instanceof GraphQLError &&
+export const isValidationError = (error: any): error is ValidationError =>
+  isObject(error) &&
   isObject(error.extensions) &&
   isObject(error.extensions!.problems) &&
   error.extensions!.code === VALIDATION_ERROR;
@@ -54,27 +53,23 @@ export const isValidationError = (error: Error): error is ValidationError =>
 export const getValidationErrors = (
   error: ApolloError | GraphQLError | Error
 ): Record<string, string> => {
-  if (!isError(error)) {
-    return {};
-  }
-
-  if (isApolloError(error)) {
+  if (error && isApolloError(error)) {
     return error.graphQLErrors.reduce(
       (acc, e) => Object.assign(acc, getValidationErrors(e)),
       {}
     );
   }
 
-  if (!isValidationError(error)) {
-    return {};
+  if (error && isValidationError(error)) {
+    return Object.entries(error.extensions.problems).reduce(
+      (acc, [key, value]) => {
+        const message = Array.isArray(value) ? value[0] : value;
+        const updates = isString(message) ? { [key]: message } : {};
+        return Object.assign(acc, updates);
+      },
+      {}
+    );
   }
 
-  return Object.entries(error.extensions.problems).reduce(
-    (acc, [key, value]) => {
-      const message = Array.isArray(value) ? value[0] : value;
-      const updates = isString(message) ? { [key]: message } : {};
-      return Object.assign(acc, updates);
-    },
-    {}
-  );
+  return {};
 };
