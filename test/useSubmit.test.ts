@@ -34,7 +34,10 @@ describe("useSubmit", () => {
   });
 
   it("handles submissions with errors", async () => {
-    const error = createValidationError("invalid", { name: ["is required"] });
+    const error = createValidationError("GraphQL error: invalid", {
+      name: ["is required"]
+    });
+
     const onSubmit = jest.fn().mockRejectedValue(error);
     const { result } = renderHook(() => useSubmit(onSubmit));
     const formikProps = createFormikProps();

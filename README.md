@@ -60,6 +60,22 @@ Is the error a validation error?
 
 </details>
 
+## getStatusFromError
+
+Get the form status based on an error.
+
+### Props
+
+<details>
+
+| Name                                                  | Type     | Description |
+| ----------------------------------------------------- | -------- | ----------- |
+| <strong>name</strong> <sup><em>required</em></sup>    | `string` |             |
+| <strong>message</strong> <sup><em>required</em></sup> | `string` |             |
+| <strong>stack</strong>                                | `string` |             |
+
+</details>
+
 ## getValidationErrors
 
 Extract all validation errors from an error.

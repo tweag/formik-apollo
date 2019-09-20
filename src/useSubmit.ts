@@ -1,11 +1,10 @@
 import { useCallback } from "react";
 import { isApolloError } from "apollo-client";
-import { getValidationErrors } from "./errors";
 import { SubmitHandler, SubmitOptions } from "./types";
-
-const getStatusDefault = (error: Error) => ({
-  error: error.message
-});
+import {
+  getValidationErrors,
+  getStatusFromError
+} from "./errors";
 
 /**
  * Wraps form submission with loading/error handling.
@@ -13,7 +12,7 @@ const getStatusDefault = (error: Error) => ({
 export const useSubmit = <T>(
   onSubmit: SubmitHandler<T>,
   {
-    getStatus = getStatusDefault,
+    getStatus = getStatusFromError,
     getErrors = getValidationErrors
   }: SubmitOptions = {}
 ): SubmitHandler<T> => {

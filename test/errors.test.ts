@@ -1,6 +1,10 @@
-import { getValidationErrors, VALIDATION_ERROR } from "../src";
 import { GraphQLError } from "graphql";
 import { ApolloError } from "apollo-client";
+import {
+  getStatusFromError,
+  getValidationErrors,
+  VALIDATION_ERROR
+} from "../src";
 
 const graphQLError = new GraphQLError("whoops!");
 const nameError = new GraphQLError(
@@ -27,6 +31,16 @@ const ageError = new GraphQLError(
 
 const apolloError = new ApolloError({
   graphQLErrors: [nameError, graphQLError, ageError]
+});
+
+describe('getStatusFromError', () => {
+  it('removes the GraphQL prefix from an error', () => {
+    const error = new Error('GraphQL error: Oh no!');
+
+    expect(getStatusFromError(error)).toEqual({
+      error: 'Oh no!'
+    });
+  });
 });
 
 describe("getValidationErrors", () => {
