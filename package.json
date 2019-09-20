@@ -1,7 +1,8 @@
 {
   "version": "1.3.0",
   "name": "formik-apollo",
-  "description": "A React hooks to extract validation errors from a GraphQL request and apply them to a Formik form.",
+  "homepage": "https://github.com/rzane/react-forms/tree/master/packages/formik-apollo",
+  "description": "A React hook to extract validation errors from a GraphQL request and apply them to a Formik form.",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
