@@ -1,6 +1,6 @@
 # formik-apollo
 
-A React hooks to extract validation errors from a GraphQL request and apply them to a Formik form.
+A React hook to extract validation errors from a GraphQL request and apply them to a Formik form.
 
 ## VALIDATION_ERROR
 
