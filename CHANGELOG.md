@@ -3,18 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.4.0](https://github.com/rzane/react-baseline-inputs/compare/v1.3.0...v1.4.0) (2019-09-20)
+# [1.4.0](https://github.com/promptworks/react-baseline-inputs/compare/v1.3.0...v1.4.0) (2019-09-20)
 
 
 ### Features
 
-* remove the graphql prefix from error messages ([c3fc86d](https://github.com/rzane/react-baseline-inputs/commit/c3fc86d))
+* remove the graphql prefix from error messages ([c3fc86d](https://github.com/promptworks/react-baseline-inputs/commit/c3fc86d))
 
 
 
 
 
-# [1.3.0](https://github.com/rzane/react-baseline-inputs/compare/v1.3.0-alpha.0...v1.3.0) (2019-09-16)
+# [1.3.0](https://github.com/promptworks/react-baseline-inputs/compare/v1.3.0-alpha.0...v1.3.0) (2019-09-16)
 
 **Note:** Version bump only for package formik-apollo
 
@@ -22,6 +22,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [1.0.0](https://github.com/rzane/react-baseline-inputs/compare/v0.6.12...v1.0.0) (2019-07-31)
+# [1.0.0](https://github.com/promptworks/react-baseline-inputs/compare/v0.6.12...v1.0.0) (2019-07-31)
 
 **Note:** Version bump only for package formik-apollo
