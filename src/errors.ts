@@ -51,7 +51,7 @@ export const isValidationError = (error: any): error is ValidationError =>
  * Get the form status based on an error.
  */
 export const getStatusFromError = (error: Error) => ({
-  error: error.message.replace(/^GraphQL error: /, '')
+  error: error.message.replace(/^GraphQL error: /, "")
 });
 
 /**

@@ -33,12 +33,12 @@ const apolloError = new ApolloError({
   graphQLErrors: [nameError, graphQLError, ageError]
 });
 
-describe('getStatusFromError', () => {
-  it('removes the GraphQL prefix from an error', () => {
-    const error = new Error('GraphQL error: Oh no!');
+describe("getStatusFromError", () => {
+  it("removes the GraphQL prefix from an error", () => {
+    const error = new Error("GraphQL error: Oh no!");
 
     expect(getStatusFromError(error)).toEqual({
-      error: 'Oh no!'
+      error: "Oh no!"
     });
   });
 });

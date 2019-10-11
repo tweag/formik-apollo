@@ -1,10 +1,7 @@
 import { useCallback } from "react";
 import { isApolloError } from "apollo-client";
 import { SubmitHandler, SubmitOptions } from "./types";
-import {
-  getValidationErrors,
-  getStatusFromError
-} from "./errors";
+import { getValidationErrors, getStatusFromError } from "./errors";
 
 /**
  * Wraps form submission with loading/error handling.
