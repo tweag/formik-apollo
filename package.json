@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "apollo-client": "^2.6.3",
-    "formik": "^2.0.1-rc.12",
+    "formik": "^2.0.1-rc.13",
     "graphql": "^14.0.0",
     "react": "^16.8.6"
   }
