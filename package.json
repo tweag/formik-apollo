@@ -14,7 +14,10 @@
   "scripts": {
     "test": "jest",
     "build": "bili --format cjs --format esm src/index.ts",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "format": "prettier --write '**/*.{js,ts,tsx}'",
+    "format:check": "prettier --check '**/*.{js,ts,tsx}'",
+    "prepublishOnly": "yarn build"
   },
   "jest": {
     "preset": "ts-jest"
@@ -33,6 +36,7 @@
     "formik": "2.0.1-rc.13",
     "graphql": "^14.5.8",
     "jest": "^24.9.0",
+    "prettier": "^1.18.2",
     "react": "^16.10.2",
     "react-test-renderer": "^16.10.2",
     "rollup-plugin-typescript2": "^0.24.3",
