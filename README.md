@@ -1,6 +1,6 @@
 # formik-apollo
 
-![Build](https://img.shields.io/travis/promptworks/react-forms/master?style=flat-square)
+![Build](https://img.shields.io/travis/promptworks/formik-apollo/master?style=flat-square)
 ![Version](https://img.shields.io/npm/v/formik-apollo?style=flat-square)
 ![Size](https://img.shields.io/bundlephobia/min/formik-apollo?style=flat-square)
 ![License](https://img.shields.io/npm/l/formik-apollo?style=flat-square)
