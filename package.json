@@ -1,7 +1,7 @@
 {
   "version": "1.4.0",
   "name": "formik-apollo",
-  "repository": "https://github.com/promptworks/react-forms/tree/master/packages/formik-apollo",
+  "repository": "https://github.com/promptworks/formik-apollo",
   "description": "A React hook to extract validation errors from a GraphQL request and apply them to a Formik form.",
   "license": "MIT",
   "main": "dist/index.js",
@@ -12,13 +12,31 @@
     "dist"
   ],
   "scripts": {
+    "test": "jest",
     "build": "bili --format cjs --format esm src/index.ts",
     "clean": "rm -rf dist"
+  },
+  "jest": {
+    "preset": "ts-jest"
   },
   "peerDependencies": {
     "apollo-client": "*",
     "formik": "^2.0",
     "graphql": "*",
     "react": ">=16.8"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^3.1.0",
+    "@types/jest": "^24.0.19",
+    "apollo-client": "^2.6.4",
+    "bili": "^4.8.1",
+    "formik": "2.0.1-rc.13",
+    "graphql": "^14.5.8",
+    "jest": "^24.9.0",
+    "react": "^16.10.2",
+    "react-test-renderer": "^16.10.2",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
   }
 }
