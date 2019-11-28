@@ -15,7 +15,7 @@ console.error = (...args: any[]) => {
   }
 };
 
-const createFormikProps = () => ({
+const createFormikActions = () => ({
   setErrors: jest.fn(),
   setStatus: jest.fn(),
   setSubmitting: jest.fn()
@@ -23,31 +23,48 @@ const createFormikProps = () => ({
 
 describe("useSubmit", () => {
   it("handles successful submissions", async () => {
-    const onSubmit = jest.fn().mockResolvedValue(null);
-    const { result } = renderHook(() => useSubmit(onSubmit));
-    const formikProps = createFormikProps();
+    const mutate = jest.fn().mockResolvedValue(99);
+    const onCompleted = jest.fn();
+    const { result } = renderHook(() => useSubmit({ mutate, onCompleted }));
+    const actions = createFormikActions();
 
-    await result.current({}, formikProps as any);
-    expect(formikProps.setSubmitting).toHaveBeenCalledTimes(2);
-    expect(formikProps.setErrors).not.toBeCalled();
-    expect(formikProps.setStatus).not.toBeCalled();
+    await result.current({}, actions as any);
+    expect(actions.setSubmitting).toHaveBeenCalledTimes(2);
+    expect(actions.setErrors).not.toBeCalled();
+    expect(actions.setStatus).not.toBeCalled();
+    expect(onCompleted).toHaveBeenCalledWith(99);
   });
 
-  it("handles submissions with errors", async () => {
+  it("handles submissions with GraphQL errors", async () => {
     const error = createValidationError("GraphQL error: invalid", {
       name: ["is required"]
     });
 
-    const onSubmit = jest.fn().mockRejectedValue(error);
-    const { result } = renderHook(() => useSubmit(onSubmit));
-    const formikProps = createFormikProps();
+    const mutate = jest.fn().mockRejectedValue(error);
+    const onError = jest.fn();
+    const { result } = renderHook(() => useSubmit({ mutate, onError }));
+    const actions = createFormikActions();
 
-    await result.current({}, formikProps as any);
+    await result.current({}, actions as any);
 
-    expect(formikProps.setSubmitting).toHaveBeenCalledTimes(2);
-    expect(formikProps.setErrors).toHaveBeenCalledWith({ name: "is required" });
-    expect(formikProps.setStatus).toBeCalledWith({
-      error: "invalid"
-    });
+    expect(actions.setSubmitting).toHaveBeenCalledTimes(2);
+    expect(actions.setErrors).toHaveBeenCalledWith({ name: "is required" });
+    expect(actions.setStatus).toBeCalledWith({ error: "invalid" });
+    expect(onError).toHaveBeenCalledWith(error);
+  });
+
+  it("handles submissions with other errors errors", async () => {
+    const error = new Error("boom");
+    const mutate = jest.fn().mockRejectedValue(error);
+    const onError = jest.fn();
+    const { result } = renderHook(() => useSubmit({ mutate, onError }));
+    const actions = createFormikActions();
+
+    await expect(result.current({}, actions as any)).rejects.toThrow(error);
+
+    expect(actions.setSubmitting).toHaveBeenCalledTimes(2);
+    expect(actions.setErrors).not.toHaveBeenCalled();
+    expect(actions.setStatus).not.toHaveBeenCalled();
+    expect(onError).toHaveBeenCalledWith(error);
   });
 });

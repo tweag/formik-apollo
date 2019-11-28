@@ -19,13 +19,15 @@ export interface ValidationError extends GraphQLError {
 export type SubmitHandler<T, R = any> = (
   data: T,
   actions: FormikHelpers<T>
-) => R;
+) => Promise<R>;
 
 /**
  * Options the can be passed to `useSubmit`.
  */
-export interface SubmitOptions<T> {
-  onCompleted?: (result: T) => void;
+export interface SubmitOptions<T, R = any> {
+  mutate: SubmitHandler<T, R>;
+  onCompleted?: (result: R) => void | Promise<void>;
+  onError?: (error: Error) => void | Promise<void>;
   getStatus?: (error: Error) => any;
   getErrors?: (error: Error) => Record<string, string>;
 }
@@ -44,10 +46,10 @@ export type Nullable<T> = { [K in keyof T]: T[K] | null };
  * is called, and therefore the values passed to `onSubmit` are
  * not nullable.
  */
-export type FormProps<T> = Omit<
+export type FormProps<T, R = any> = Omit<
   FormikConfig<Nullable<T>>,
   "initialValues" | "onSubmit"
 > & {
   initialValues?: Nullable<T>;
-  onSubmit: SubmitHandler<T>;
+  onSubmit: SubmitHandler<T, R>;
 };
