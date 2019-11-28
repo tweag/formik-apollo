@@ -1,4 +1,4 @@
-import { FormikHelpers, FormikConfig } from "formik";
+import { FormikConfig, FormikHelpers } from "formik";
 import { GraphQLError } from "graphql";
 
 /**
@@ -16,12 +16,16 @@ export interface ValidationError extends GraphQLError {
 /**
  * The function that is called when the form is submitted.
  */
-export type SubmitHandler<T> = (data: T, actions: FormikHelpers<T>) => any;
+export type SubmitHandler<T, R = any> = (
+  data: T,
+  actions: FormikHelpers<T>
+) => R;
 
 /**
  * Options the can be passed to `useSubmit`.
  */
-export interface SubmitOptions {
+export interface SubmitOptions<T> {
+  onCompleted?: (result: T) => void;
   getStatus?: (error: Error) => any;
   getErrors?: (error: Error) => Record<string, string>;
 }
