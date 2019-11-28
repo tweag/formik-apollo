@@ -1,5 +1,5 @@
 {
-  "version": "1.4.1",
+  "version": "2.0.0",
   "name": "formik-apollo",
   "repository": "https://github.com/promptworks/formik-apollo",
   "description": "A React hook to extract validation errors from a GraphQL request and apply them to a Formik form.",
