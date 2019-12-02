@@ -4,6 +4,7 @@
 
 import { useSubmit, createValidationError } from "../src";
 import { renderHook } from "@testing-library/react-hooks";
+import { FormikHelpers } from "formik";
 
 /**
  * Be quiet.
@@ -15,11 +16,13 @@ console.error = (...args: any[]) => {
   }
 };
 
-const createFormikActions = () => ({
-  setErrors: jest.fn(),
-  setStatus: jest.fn(),
-  setSubmitting: jest.fn()
-});
+const values = { foo: "bar" };
+const createFormikActions = (): FormikHelpers<any> =>
+  ({
+    setErrors: jest.fn(),
+    setStatus: jest.fn(),
+    setSubmitting: jest.fn()
+  } as any);
 
 describe("useSubmit", () => {
   it("handles successful submissions", async () => {
@@ -28,11 +31,11 @@ describe("useSubmit", () => {
     const { result } = renderHook(() => useSubmit({ mutate, onCompleted }));
     const actions = createFormikActions();
 
-    await result.current({}, actions as any);
+    await result.current(values, actions);
     expect(actions.setSubmitting).toHaveBeenCalledTimes(2);
     expect(actions.setErrors).not.toBeCalled();
     expect(actions.setStatus).not.toBeCalled();
-    expect(onCompleted).toHaveBeenCalledWith(99);
+    expect(onCompleted).toHaveBeenCalledWith(99, values, actions);
   });
 
   it("handles submissions with GraphQL errors", async () => {
@@ -45,12 +48,12 @@ describe("useSubmit", () => {
     const { result } = renderHook(() => useSubmit({ mutate, onError }));
     const actions = createFormikActions();
 
-    await result.current({}, actions as any);
+    await result.current(values, actions);
 
     expect(actions.setSubmitting).toHaveBeenCalledTimes(2);
     expect(actions.setErrors).toHaveBeenCalledWith({ name: "is required" });
     expect(actions.setStatus).toBeCalledWith({ error: "invalid" });
-    expect(onError).toHaveBeenCalledWith(error);
+    expect(onError).toHaveBeenCalledWith(error, values, actions);
   });
 
   it("handles submissions with other errors errors", async () => {
@@ -60,11 +63,11 @@ describe("useSubmit", () => {
     const { result } = renderHook(() => useSubmit({ mutate, onError }));
     const actions = createFormikActions();
 
-    await expect(result.current({}, actions as any)).rejects.toThrow(error);
+    await expect(result.current(values, actions)).rejects.toThrow(error);
 
     expect(actions.setSubmitting).toHaveBeenCalledTimes(2);
     expect(actions.setErrors).not.toHaveBeenCalled();
     expect(actions.setStatus).not.toHaveBeenCalled();
-    expect(onError).toHaveBeenCalledWith(error);
+    expect(onError).toHaveBeenCalledWith(error, values, actions);
   });
 });

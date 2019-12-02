@@ -22,17 +22,17 @@ export const useSubmit = <T, R = any>({
       try {
         const result = await mutate(values, form);
         form.setSubmitting(false);
-        await onCompleted(result);
+        await onCompleted(result, values, form);
         return result;
       } catch (error) {
         if (isApolloError(error)) {
           form.setStatus(getStatus(error));
           form.setErrors(getErrors(error) as any);
           form.setSubmitting(false);
-          await onError(error);
+          await onError(error, values, form);
         } else {
           form.setSubmitting(false);
-          await onError(error);
+          await onError(error, values, form);
           throw error;
         }
       }
