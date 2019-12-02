@@ -28,7 +28,7 @@ export type CompletedHandler<T, R = any> = (
   result: R,
   values: T,
   actions: FormikHelpers<T>
-) => void | Promise<void>;
+) => any;
 
 /**
  * The function that is called when the form submission fails.
@@ -37,7 +37,7 @@ export type ErrorHandler<T> = (
   error: Error,
   values: T,
   actions: FormikHelpers<T>
-) => void | Promise<void>;
+) => any;
 
 /**
  * Options the can be passed to `useSubmit`.
