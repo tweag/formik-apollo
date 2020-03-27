@@ -51,23 +51,12 @@ export interface SubmitOptions<T, R = any> {
 }
 
 /**
- * Allow all values to be `null`.
- */
-export type Nullable<T> = { [K in keyof T]: T[K] | null };
-
-/**
- * Define the props that a form component will take.
- *
- * This will allow `initialValues` to be nullable.
- *
- * It assumes that validation will occur before `onSubmit` function
- * is called, and therefore the values passed to `onSubmit` are
- * not nullable.
+ * A shortcut for defining the props that a form component will take.
  */
 export type FormProps<T, R = any> = Omit<
-  FormikConfig<Nullable<T>>,
+  FormikConfig<T>,
   "initialValues" | "onSubmit"
 > & {
-  initialValues?: Nullable<T>;
+  initialValues?: T;
   onSubmit: SubmitHandler<T, R>;
 };
