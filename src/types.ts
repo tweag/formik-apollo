@@ -16,7 +16,7 @@ export interface ValidationError extends GraphQLError {
 /**
  * The function that is called when the form is submitted.
  */
-export type SubmitHandler<T, R = any> = (
+export type SubmitHandler<T, R> = (
   values: T,
   actions: FormikHelpers<T>
 ) => Promise<R>;
@@ -24,7 +24,7 @@ export type SubmitHandler<T, R = any> = (
 /**
  * The function that is called when the form is successfully submitted.
  */
-export type CompletedHandler<T, R = any> = (
+export type CompletedHandler<T, R> = (
   result: R,
   values: T,
   actions: FormikHelpers<T>
@@ -42,7 +42,7 @@ export type ErrorHandler<T> = (
 /**
  * Options the can be passed to `useSubmit`.
  */
-export interface SubmitOptions<T, R = any> {
+export interface SubmitOptions<T, R> {
   mutate: SubmitHandler<T, R>;
   onCompleted?: CompletedHandler<T, R>;
   onError?: ErrorHandler<T>;
