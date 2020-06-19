@@ -32,7 +32,7 @@
     "@testing-library/react-hooks": "^3.1.0",
     "@types/jest": "^25.2.1",
     "apollo-client": "^2.6.4",
-    "bili": "^4.8.1",
+    "bili": "^5.0.4",
     "formik": "2.1.4",
     "graphql": "^15.0.0",
     "jest": "^25.4.0",
