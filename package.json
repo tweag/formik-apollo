@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^3.1.0",
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^26.0.2",
     "apollo-client": "^2.6.4",
     "bili": "^4.8.1",
     "formik": "2.1.4",
